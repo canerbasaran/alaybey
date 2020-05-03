@@ -2,6 +2,9 @@
 
 It's a simple stupid live-reloading tool for web development.
 
+## Portable Binaries
+https://github.com/canerbasaran/alaybey/releases/tag/v0.1.0
+
 ## Install for non-Go users
 
 ```sh
