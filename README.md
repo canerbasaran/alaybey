@@ -1,25 +1,10 @@
-# alaybey
+<div align="center">
+  <h1>alaybey</h1>
 
-It's a simple stupid live-reloading tool for web development.
-
-## Portable Binaries
-https://github.com/canerbasaran/alaybey/releases/tag/v0.1.0
-
-## Install for non-Go users
-
-```sh
-curl -sf https://gobinaries.com/canerbasaran/alaybey | sh
-```
-
-## Install
-
-```
-go get github.com/canerbasaran/alaybey
-```
+  <p>It's a simple stupid live-reloading tool for web development</p>
+</div>
 
 ## Usage 
-
-### Basic usage
 
 You can just run `alaybey` in a directory:
 
@@ -39,7 +24,25 @@ Usage of alaybey:
         port to serve (default 8003)
 ```
 
-## Credits
+## Portable Binaries
+https://github.com/canerbasaran/alaybey/releases/tag/v0.1.0
+
+## Installation
+#### for non-Go users
+
+```sh
+curl -sf https://gobinaries.com/canerbasaran/alaybey | sh
+```
+
+#### Install
+
+```
+go get github.com/canerbasaran/alaybey
+```
+
+
+
+## Thanks
 
 https://github.com/schollz/browsersync
 
