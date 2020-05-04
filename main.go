@@ -19,6 +19,8 @@ import (
 var folderToWatch, indexPage string
 var port int
 var messageChannels = make(map[chan []byte]bool)
+var quit = make(chan bool)
+var isRoutineOpen = false
 
 const jsFile = "35b96a650c2fbb93d23dd81116b561b8.js"
 
@@ -95,7 +97,11 @@ func watchFileSystem() (err error) {
 				_, fname := filepath.Split(event.Name)
 				if time.Since(lastEvent).Nanoseconds() > (50*time.Millisecond).Nanoseconds() && !strings.HasPrefix(fname, ".") && !strings.HasSuffix(fname, "~") {
 					lastEvent = time.Now()
-					go send()
+					go func() {
+						for messageChannel := range messageChannels {
+							messageChannel <- []byte("")
+						}
+					}()
 				}
 			}
 		}
@@ -119,6 +125,10 @@ func handleSSE(w http.ResponseWriter, r *http.Request) {
 
 	_messageChannel := make(chan []byte)
 	messageChannels[_messageChannel] = true
+	if isRoutineOpen {
+		quit <- true
+		isRoutineOpen = false
+	}
 
 	for {
 		select {
@@ -127,14 +137,21 @@ func handleSSE(w http.ResponseWriter, r *http.Request) {
 			w.(http.Flusher).Flush()
 		case <-r.Context().Done():
 			delete(messageChannels, _messageChannel)
+			if len(messageChannels) == 0 {
+				go checkIdle()
+				isRoutineOpen = true
+			}
 			return
 		}
 	}
 }
 
-func send() {
-	for messageChannel := range messageChannels {
-		messageChannel <- []byte("")
+func checkIdle() {
+	select {
+	case <-quit:
+		return
+	case <-time.Tick(time.Second * 3):
+		os.Exit(3)
 	}
 }
 
