@@ -56,6 +56,8 @@ https://github.com/fsnotify/fsnotify
 
 https://gist.github.com/fdrechsler/a20e8d2b8ff656db3bff9533e957be0c
 
+Bill Dortch's Cookie Functions
+
 ## License
 
 MIT
