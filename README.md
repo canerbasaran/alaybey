@@ -4,6 +4,12 @@
   <p>It's a simple stupid live-reloading tool for web development</p>
 </div>
 
+
+## Feature
+- Scroll memory
+- Send signal with SSE(Server Sent Event) when the file is changed
+- Auto shutdown when all opened tabs is closed
+
 ## Usage 
 
 You can just run `alaybey` in a directory:
